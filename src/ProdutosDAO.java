@@ -71,6 +71,27 @@ public class ProdutosDAO {
             JOptionPane.showMessageDialog(null, "Erro ao definir como vendido.");
         }
     }
+    public ArrayList<ProdutosDTO> listarProdutosVendidos(){
+        listagem.clear();
+        conn = new conectaDAO().connectDB();
+        try{
+            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = \"Vendido\"");
+            resultset = prep.executeQuery();
+            while(resultset.next()){
+                ProdutosDTO p = new ProdutosDTO();
+                p.setId(resultset.getInt("id"));
+                p.setNome(resultset.getString("nome"));
+                p.setValor(resultset.getInt("valor"));
+                p.setStatus(resultset.getString("status"));
+                listagem.add(p);
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao listar produtos vendidos.");
+        }
+        
+        return listagem;
+    }
     
     
     
