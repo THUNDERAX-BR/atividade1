@@ -64,7 +64,7 @@ public class ProdutosDAO {
         try{
             prep = conn.prepareStatement("UPDATE produtos SET status = \"Vendido\" WHERE id = ?");
             prep.setInt(1, id);
-            prep.executeQuery();
+            prep.executeUpdate();
             JOptionPane.showMessageDialog(null, "Produto vendido com sucesso.");
         }
         catch(Exception e){
